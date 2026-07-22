@@ -50,6 +50,10 @@ h1, h2, h3, .eyebrow, .btn, .stage-label, .qcard-index {
   padding: clamp(16px, 3vw, 28px) clamp(20px, 5vw, 56px);
 }
 .brand-logo { height: 24px; width: auto; display: block; }
+/* Co-brand: Fresh (wordmark) leads on the left, AAE partner logo on the right.
+   AAE is a stacked mark, so it needs more height than the Fresh wordmark to read. */
+.brand-logo--aae { height: 40px; }
+.topbar-right { display: flex; align-items: center; gap: clamp(12px, 2.5vw, 22px); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -388,6 +392,8 @@ h1, h2, h3, .eyebrow, .btn, .stage-label, .qcard-index {
 }
 
 @media (max-width: 560px) {
+  .brand-logo--aae { height: 30px; }
+  .topbar--wizard .topbar-progress-label { display: none; }
   .answers--grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .answer { padding: 14px; gap: 10px; }
