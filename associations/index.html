@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAE AI Readiness Check - Fresh Strategy</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232F1541'/%3E%3Ctext x='32' y='42' font-family='Helvetica,Arial,sans-serif' font-size='26' font-weight='700' text-anchor='middle' fill='%2388DBBD'%3EAI%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Find out where your association stands across the six dimensions that decide whether AI delivers results for members. A short check, with your score on screen and a full personalised report by email.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Association of Association Executives &amp; Fresh Strategy">
+<meta property="og:url" content="https://assessment.freshstrategy.ai/associations/">
+<meta property="og:title" content="AAE AI Readiness Check - Fresh Strategy">
+<meta property="og:description" content="Find out where your association stands across the six dimensions that decide whether AI delivers results for members. A short check, with your score on screen and a full personalised report by email.">
+<meta property="og:image" content="https://assessment.freshstrategy.ai/associations/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AAE AI Readiness Check - Fresh Strategy">
+<meta name="twitter:description" content="Find out where your association stands across the six dimensions that decide whether AI delivers results for members. A short check, with your score on screen and a full personalised report by email.">
+<meta name="twitter:image" content="https://assessment.freshstrategy.ai/associations/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260722">
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- ============ INTRO SCREEN ============ -->
+  <section class="screen screen--intro" id="intro">
+    <header class="topbar">
+      <img class="brand-logo" src="logo.png" alt="AAE &amp; Fresh Strategy - AI Readiness Check">
+    </header>
+    <div class="intro-inner">
+      <p class="eyebrow">AAE x Fresh Strategy - AI Readiness Check</p>
+      <h1>How ready is your association for AI?</h1>
+      <p class="lede">Find out where your association stands across the six dimensions
+        that decide whether AI delivers results for your members, your board and your team.</p>
+
+      <div class="intro-columns">
+        <div class="expect">
+          <div class="expect-item">
+            <div class="expect-num" aria-hidden="true">1</div>
+            <p><b>Seventeen scored questions,</b> plus a short profile. About ten minutes.</p>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num" aria-hidden="true">2</div>
+            <p><b>Answer for where your association is today,</b> not where you plan to be.</p>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num" aria-hidden="true">3</div>
+            <p><b>See your score immediately,</b> with your full personalised report by email.</p>
+          </div>
+        </div>
+
+        <div class="intro-preview" aria-hidden="true">
+          <div class="intro-preview-chart" id="introRadar"></div>
+          <p class="intro-preview-caption">Your six dimensions at a glance</p>
+        </div>
+      </div>
+
+      <button class="btn btn--primary btn--lg" id="startBtn">Start the AI Readiness Check</button>
+      <p class="fineprint">We store your answers to prepare your results and an anonymised
+        benchmark for AAE and Associations World Congress 2026. No third parties beyond
+        Fresh Solutions GmbH, and you can stop at any time.
+        <a href="https://www.freshstrategy.ai/privacy-policy" target="_blank" rel="noopener">Privacy policy</a></p>
+    </div>
+  </section>
+
+  <!-- ============ WIZARD SCREEN ============ -->
+  <section class="screen screen--wizard" id="wizard" hidden>
+    <header class="topbar topbar--wizard">
+      <img class="brand-logo" src="logo.png" alt="AAE &amp; Fresh Strategy - AI Readiness Check">
+      <div class="topbar-progress">
+        <span id="progressLabel" class="topbar-progress-label"></span>
+      </div>
+    </header>
+
+    <div class="wizard-body">
+      <!-- Left section stepper -->
+      <nav class="stepper" id="stepper" aria-label="Assessment sections"></nav>
+
+      <!-- Question stage -->
+      <main class="stage">
+        <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+        <div class="qcard" id="qcard">
+          <div class="qcard-head">
+            <span class="qcard-index" id="qIndex"></span>
+            <h1 class="qcard-stem" id="qStem"></h1>
+          </div>
+          <p class="qcard-hint" id="qHint"></p>
+        </div>
+
+        <div class="answers" id="answers"></div>
+
+        <div class="nav-row">
+          <button class="navbtn" id="prevBtn" aria-label="Previous">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="btn btn--primary" id="nextBtn" disabled>Next</button>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS SCREEN ============ -->
+  <section class="screen screen--results" id="results" hidden>
+    <header class="topbar">
+      <img class="brand-logo" src="logo.png" alt="AAE &amp; Fresh Strategy - AI Readiness Check">
+    </header>
+    <div class="results-inner" id="resultsInner"></div>
+  </section>
+
+</div>
+
+<script src="script.js?v=20260722"></script>
+</body>
+</html>
