@@ -594,7 +594,8 @@ function renderCounts(container) {
     <div class="counts-grid">
       ${fieldDef.map(f => `
         <div class="field ${f.key === primary ? "is-primary" : ""}">
-          <label for="${f.id}">${f.label}${f.key === primary ? " <span class=\"field-primary-tag\">your main members</span>" : ""}</label>
+          <span class="field-primary-tag ${f.key === primary ? "" : "is-empty"}">your main members</span>
+          <label for="${f.id}">${f.label}</label>
           <input id="${f.id}" type="text" inputmode="numeric" placeholder="e.g. 1,200" value="${esc(c[f.key])}">
         </div>`).join("")}
     </div>`;

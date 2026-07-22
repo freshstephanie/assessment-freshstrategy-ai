@@ -439,11 +439,14 @@ h1, h2, h3, .eyebrow, .btn, .stage-label, .qcard-index {
    names why this field is highlighted without implying it's mandatory (all
    three count fields stay optional). */
 .field-primary-tag {
+  align-self: flex-start;
   font-family: 'Space Grotesk', sans-serif; font-size: 0.62rem; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.05em; color: var(--purple);
-  background: var(--mint-soft); border-radius: 5px; padding: 2px 6px; margin-left: 8px;
-  vertical-align: middle;
+  background: var(--mint-soft); border-radius: 5px; padding: 2px 6px;
 }
+/* non-primary columns keep an invisible tag of the same height so all three
+   labels + inputs stay on one horizontal line */
+.field-primary-tag.is-empty { visibility: hidden; }
 .field-note { font-size: 0.82rem; color: var(--purple-70); margin: 4px 0 18px; }
 
 /* ---------- Multi-select (function): grid of toggle chips ---------- */
@@ -484,4 +487,6 @@ h1, h2, h3, .eyebrow, .btn, .stage-label, .qcard-index {
 @media (max-width: 560px) {
   .profile-grid, .counts-grid, .answers--multi { grid-template-columns: 1fr; }
   .scale-pip { min-width: 38px; font-size: 0.92rem; }
+  /* single column: no need for alignment spacers */
+  .field-primary-tag.is-empty { display: none; }
 }
