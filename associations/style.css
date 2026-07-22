@@ -216,6 +216,8 @@ h1, h2, h3, .eyebrow, .btn, .stage-label, .qcard-index {
   color: var(--purple); margin: 0; font-weight: 600;
 }
 .qcard-hint { margin: 12px 0 0 0; color: var(--purple-70); font-size: 0.95rem; }
+/* last-page disclaimer: smaller, same size as the intro privacy-policy fineprint */
+.qcard-hint--fine { font-size: 0.82rem; }
 .qcard-hint a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .qcard-hint a:hover { color: var(--purple); }
 

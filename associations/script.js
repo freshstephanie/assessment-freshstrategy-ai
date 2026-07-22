@@ -473,6 +473,7 @@ function render() {
   answers.className = "answers";
   answers.removeAttribute("role");
   answers.removeAttribute("aria-label");
+  el("qHint").className = "qcard-hint"; // clear any per-step hint modifier (e.g. finish-step --fine)
 
   if (step.kind === "consent") renderConsent1(answers);
   else if (step.kind === "profile") renderProfile(answers);
@@ -687,7 +688,8 @@ function renderFinish(container) {
   el("qIndex").textContent = "";
   el("qStem").textContent = "Last step - where should we send your report?";
   const tier = computeScores().tier.name;
-  el("qHint").innerHTML = `Your result is ready: ${esc(tier)}. Enter your work email and confirm to see your full breakdown - we'll email your personalised report there too. We store your answers to prepare your results. <a href="https://www.freshstrategy.ai/privacy-policy" target="_blank" rel="noopener">No third parties beyond Fresh Solutions GmbH.</a>`;
+  el("qHint").innerHTML = `Your result is ready: ${esc(tier)}. Enter your work email and confirm to see your full breakdown - we'll email your personalised report there too. We store your answers to prepare your results. <a href="https://www.freshsolutions.ai/privacy-policy" target="_blank" rel="noopener">No third parties beyond freshsolutions.ai.</a>`;
+  el("qHint").classList.add("qcard-hint--fine"); // last-page disclaimer: small, matches the privacy-policy fineprint size
   container.innerHTML = `
     <div class="finish-stack">
       <div class="field field--full">
@@ -870,7 +872,7 @@ function submitNoteText() {
   if (submitStatus === "sent")
     return `Your responses have been recorded for the AAE benchmark. A copy of your full report is on its way to ${state.email}.`;
   if (submitStatus === "failed")
-    return "We couldn't reach our server - your results above are complete, but the email copy may not arrive. Let us know at rewire@freshstrategy.ai so we can check your response was saved.";
+    return "We couldn't reach our server - your results above are complete, but the email copy may not arrive. Let us know at stephanie@freshsolutions.ai so we can check your response was saved.";
   return `Sending your results to ${state.email}...`;
 }
 
