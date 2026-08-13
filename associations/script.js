@@ -303,12 +303,25 @@ const DIM_FOCUS = {
   results:    "Start tying AI activity to the KPIs your board already tracks - retention, engagement, event attendance, non-dues revenue. Measurement turns anecdotes into a case for the next investment.",
 };
 
-/* ---------- Tiers (per spec: 0-30 / 31-50 / 51-70 / 71-85 / 86-100) ---------- */
+/* Tie-break order for the weakest dimension, per tier - mirrors the AAE
+   Apps Script prioritySequences exactly so screen and emailed report always
+   name the same focus dimension. Same matrix as the business front end. */
+const TIE_PRIORITY = {
+  Foundation:  ["vision", "people", "operations", "data", "governance", "results"],
+  Developing:  ["vision", "operations", "people", "data", "governance", "results"],
+  Established: ["operations", "people", "data", "vision", "governance", "results"],
+  Advanced:    ["data", "governance", "operations", "people", "results", "vision"],
+  Leading:     ["data", "governance", "operations", "people", "vision", "results"],
+};
+
+/* ---------- Tiers (0-30 / 31-50 / 51-70 / 71-84 / 85-100) ----------
+   Boundaries mirror the AAE Apps Script determineTier() and the business
+   assessment: Advanced tops out at 84, Leading starts at 85. */
 const TIERS = [
   { name: "Foundation",  max: 30,  blurb: "You're at the starting line. The pieces aren't in place yet, but that's the opportunity: a focused first move on one dimension can shift your whole trajectory." },
   { name: "Developing",  max: 50,  blurb: "Momentum is building. You've made early moves and seen what's possible. The next step is turning scattered activity into a joined-up approach across the secretariat." },
   { name: "Established", max: 70,  blurb: "You have real foundations. AI is working in places and the basics are solid. Now it's about scaling what works and closing the gaps between dimensions." },
-  { name: "Advanced",    max: 85,  blurb: "You're operating with maturity. AI is embedded across most of the secretariat. The focus shifts to consistency, measurement and pushing your weakest dimension up to match the rest." },
+  { name: "Advanced",    max: 84,  blurb: "You're operating with maturity. AI is embedded across most of the secretariat. The focus shifts to consistency, measurement and pushing your weakest dimension up to match the rest." },
   { name: "Leading",     max: 100, blurb: "You're AI-native. AI runs through strategy, operations and culture. The edge now is staying ahead - continuous improvement and turning readiness into a compounding advantage for your members." },
 ];
 
@@ -815,9 +828,17 @@ function computeScores() {
   });
   const maxTotal = 17 * 5; // 85
   const pct = Math.round(dimMeans.reduce((a, b) => a + b, 0) / dimMeans.length * 20);
-  const weakest = dims.slice().sort((a, b) => a.pct - b.pct || a.score - b.score)[0];
+  const tier = tierFor(pct);
+  // Weakest = lowest dimension mean; ties broken by the per-tier matrix
+  // (TIE_PRIORITY), exactly like the AAE Apps Script. Means are compared
+  // exactly via cross-multiplication (score/max as integer fractions).
+  const cmp = (a, b) => a.score * b.max - b.score * a.max;
+  const lowest = dims.reduce((m, d) => (cmp(d, m) < 0 ? d : m), dims[0]);
+  const tiedIds = dims.filter(d => cmp(d, lowest) === 0).map(d => d.id);
+  const weakestId = TIE_PRIORITY[tier.name].find(id => tiedIds.includes(id));
+  const weakest = dims.find(d => d.id === weakestId);
   const strongest = dims.slice().sort((a, b) => b.pct - a.pct || b.score - a.score)[0];
-  return { total, maxTotal, pct, tier: tierFor(pct), dims, weakest, strongest };
+  return { total, maxTotal, pct, tier, dims, weakest, strongest };
 }
 
 /* ============================================================
