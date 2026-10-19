@@ -634,13 +634,13 @@ function submitToGoogleForm() {
    Results rendering
    ============================================================ */
 function renderResults(s) {
-  const weak = s.weakest, strong = s.strongest;
+  const weak = s.weakest;
   el("resultsInner").innerHTML = `
     <div class="result-hero">
       <p class="result-eyebrow">Your AI Readiness</p>
       <h1 class="result-tier-name">${s.tier.name}</h1>
       <p class="result-score-line"><b>${s.pct}%</b> ready</p>
-      <p class="result-discuss"><a href="https://calendar.app.google/JqRL5oLcV3M5N4rb9" target="_blank" rel="noopener">Discuss these results with us</a></p>
+      <p class="result-discuss"><a href="https://www.freshstrategy.ai/debrief" target="_blank" rel="noopener">Book your free debrief</a></p>
       <p class="result-blurb">${s.tier.blurb}</p>
       <p class="submit-note">${esc(submitNoteText())}</p>
     </div>
@@ -665,16 +665,12 @@ function renderResults(s) {
         <h3>Where to focus first: ${weak.label}</h3>
         <p>${DIM_FOCUS[weak.id]}</p>
       </div>
-      <div class="focus-block">
-        <h3>Your strongest dimension: ${strong.label} (${strong.pct}%)</h3>
-        <p>Build from here. Your ${strong.short.toLowerCase()} strength is an asset you can use to pull the weaker dimensions up.</p>
-      </div>
     </div>
 
     <div class="result-cta">
-      <h2>What your results mean in practice</h2>
-      <p>In 30 minutes, we walk through your six scores and where to focus first, specific to your organisation.</p>
-      <a class="btn btn--primary btn--lg" href="https://calendar.app.google/JqRL5oLcV3M5N4rb9" target="_blank" rel="noopener">Discuss these results with us</a>
+      <h2>Put your first few moves in order</h2>
+      <p>A free 30-minute debrief with Stéphanie, online, at a time you pick. You leave with your first few moves, in order, agreed for your organisation.</p>
+      <a class="btn btn--primary btn--lg" href="https://www.freshstrategy.ai/debrief" target="_blank" rel="noopener">Book your debrief</a>
     </div>
 
     <div class="result-foot"><button id="restartBtn">Answer differently? Retake the assessment</button></div>
